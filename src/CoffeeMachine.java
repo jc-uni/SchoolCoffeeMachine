@@ -1,4 +1,3 @@
-import java.util.Objects;
 import java.util.Scanner;
 
 public class CoffeeMachine {
@@ -10,7 +9,6 @@ public class CoffeeMachine {
 
         while (StateMachine != States.EXIT) {
             var scanner = new Scanner(System.in);
-
             Order AnOrder = new Order();
             AnOrder.SetPricesOfDrinks();
 
@@ -34,18 +32,23 @@ public class CoffeeMachine {
                 System.out.println("What would you like to drink?");
                 System.out.println("We have:");
                 AnOrder.ListOutDrinks();
-                System.out.println("Press key # 1-" + Beverage.BeverageType.values().length);
+                System.out.println("Press key # 1-" + AnOrder.SizeOfBeveragetype);
+                System.out.println("Press 'c' to cancel order");
                 String inputSelectedBeverageType = scanner.nextLine();
 
                 switch (inputSelectedBeverageType){
+                    case "c" -> StateMachine = States.SELECTION;
                     case "1" -> AnOrder.SelectedBeverage = AnOrder.GetBeverageType("COFFEE");
                     case "2" -> AnOrder.SelectedBeverage = AnOrder.GetBeverageType("ESPRESSO");
                     case "3" -> AnOrder.SelectedBeverage = AnOrder.GetBeverageType("AMERICANO");
                     case "4" -> AnOrder.SelectedBeverage = AnOrder.GetBeverageType("COCOA");
                     case "5" -> AnOrder.SelectedBeverage = AnOrder.GetBeverageType("WATER");
                 }
-
-                StateMachine = States.DELIVERY;
+                if(AnOrder.SelectedBeverage == null){
+                    System.out.println("Invalid choice. Press 1-" +AnOrder.SizeOfBeveragetype +" or c to cancel");
+                }
+                else
+                    StateMachine = States.DELIVERY;
             }
 
             //Pay, deliver order, & exit
@@ -62,6 +65,8 @@ public class CoffeeMachine {
                 else if ("n".equals(inputConfirmation)) {
                     StateMachine = States.SELECTION;
                 }
+                else
+                    System.out.println("Invalid input.");
             }
         }
     }

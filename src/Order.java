@@ -8,6 +8,8 @@ public class Order implements Customer,Beverage{
     BeverageType SelectedBeverage;
     CustomerType SelectedCustomer;
 
+    int SizeOfBeveragetype =Beverage.BeverageType.values().length;
+
     public Order() {
 
 
