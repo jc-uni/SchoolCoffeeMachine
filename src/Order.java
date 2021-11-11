@@ -1,3 +1,5 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -5,52 +7,61 @@ public class Order implements Customer,Beverage{
 
     BeverageType SelectedBeverage;
     CustomerType SelectedCustomer;
-    //HashSet<HashMap> loremipsum = new HashSet<HashMap>();
-    //HashMap<CustomerType,HashMap<BeverageType,Integer>> NetPrice = new HashMap<>();
-    HashSet<HashMap<CustomerType,HashMap<BeverageType,Integer>>> Prices= new HashSet<>();
 
     public Order() {
 
-        SelectedBeverage=BeverageType.COCOA;
-
-
-        //Prices.add();
-        for (BeverageType bt : BeverageType.values()){
-            for(CustomerType ct : CustomerType.values()){
-
-            }
-        }
-
-
-
-
 
 
     }
 
-    public double FinalPrice(){
+    public void DeliverDrink(){
+
+
+        if (Payment(FinalPrice())){
+            System.out.println("Take your drink.");
+        }
+        else
+            System.out.println("Payment failed.");
+
+    }
+
+    //TODO Payments system, via school ID
+    private boolean Payment(double price){
+        return true;
+    }
+
+    private double FinalPrice(){
+
+        //int price = pricesOfDrinks.contains(SelectedBeverage);
+
+        //int price = pricesOfDrinks.contains(SelectedBeverage) / GetPriceModifier(SelectedCustomer);
+
         return 0;
     }
 
-
-
     @Override
-    public BeverageType GetTypeOfBeverage() {
-        return SelectedBeverage;
+    public BeverageType GetBeverageType(String name) {
+        return BeverageType.valueOf(name);
     }
 
     @Override
-    public int GetPriceOfBeverage(BeverageType BT) {
-        int price = 0;
+    public void SetPricesOfDrinks() {
 
-        //if
+        for(BeverageType b : BeverageType.values()){
+            for (int i = 0; i<listOfPrices.length; i++){
+                aDrinkAndItsPrice.put(b,i);
+                pricesOfDrinks.add(aDrinkAndItsPrice);
+            }
 
-        return price;
+        }
+
     }
 
     @Override
-    public CustomerType GetTypeOfCustomer() {
-        return null;
+    public void ListOutDrinks() {
+        for (BeverageType aDrink : BeverageType.values()) {
+            System.out.println(aDrink);
+        }
     }
 
     @Override
