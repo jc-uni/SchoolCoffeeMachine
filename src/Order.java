@@ -1,28 +1,18 @@
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-
 public class Order implements Customer,Beverage{
 
     BeverageType SelectedBeverage;
     CustomerType SelectedCustomer;
 
-    int SizeOfBeveragetype =Beverage.BeverageType.values().length;
+    int SizeOfBeverageType =Beverage.BeverageType.values().length;
 
-    public Order() {
-
-
-
-    }
+    public Order() {}
 
     public void DeliverDrink(){
 
-
-        if (Payment(FinalPrice())){
+        System.out.println("Your account will be charged " +FinalPrice());
+        if (Payment(FinalPrice())) {
             System.out.println("Take your drink.");
-        }
-        else
+        } else
             System.out.println("Payment failed.");
 
     }
@@ -33,12 +23,7 @@ public class Order implements Customer,Beverage{
     }
 
     private double FinalPrice(){
-
-        //int price = pricesOfDrinks.contains(SelectedBeverage);
-
-        //int price = pricesOfDrinks.contains(SelectedBeverage) / GetPriceModifier(SelectedCustomer);
-
-        return 0;
+        return drinksAndTheirPrices.get(SelectedBeverage) * GetPriceModifier(SelectedCustomer);
     }
 
     @Override
@@ -48,15 +33,11 @@ public class Order implements Customer,Beverage{
 
     @Override
     public void SetPricesOfDrinks() {
-
+        int i = 0;
         for(BeverageType b : BeverageType.values()){
-            for (int i = 0; i<listOfPrices.length; i++){
-                aDrinkAndItsPrice.put(b,i);
-                pricesOfDrinks.add(aDrinkAndItsPrice);
-            }
-
+            drinksAndTheirPrices.put(b,listOfPrices[i]);
+            i++;
         }
-
     }
 
     @Override
@@ -68,7 +49,6 @@ public class Order implements Customer,Beverage{
 
     @Override
     public double GetPriceModifier(CustomerType CT) {
-
         double priceModifier = 0;
 
         if(CT == CustomerType.FACULTY){
@@ -80,7 +60,11 @@ public class Order implements Customer,Beverage{
         else if (CT == CustomerType.GUEST){
             priceModifier = 1.0;
         }
-
         return priceModifier;
+    }
+
+    @Override
+    public CustomerType GetCustomerType(String name) {
+        return CustomerType.valueOf(name);
     }
 }

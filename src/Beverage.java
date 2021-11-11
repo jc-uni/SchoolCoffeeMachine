@@ -1,14 +1,11 @@
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 public interface Beverage {
 
     enum BeverageType{COFFEE, ESPRESSO, AMERICANO, COCOA, WATER}
-    int[] listOfPrices = {10,20,30,40,50};
+    int[] listOfPrices = {20,30,30,20,0};
 
-    HashSet<HashMap<BeverageType,Integer>> pricesOfDrinks = new HashSet<>();
-    HashMap<BeverageType,Integer> aDrinkAndItsPrice = new HashMap<>();
+    HashMap<BeverageType,Integer> drinksAndTheirPrices = new HashMap<>();
 
     BeverageType GetBeverageType(String name);
 
