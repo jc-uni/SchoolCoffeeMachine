@@ -14,8 +14,8 @@ public class CoffeeMachine {
 
             //Identify student, faculty, or guest
             while (StateMachine == States.ENTRY){
-                System.out.println("\r\nWelcome");
-                System.out.print("Select customer type:\r\n1, faculty. 2, student. 3, guest");
+                System.out.print("\r\nWelcome\r\nSelect customer type:\r\n1, faculty. 2, student. 3, guest");
+
                 String inputSelectedCustomerType = scanner.nextLine();
 
                 switch (inputSelectedCustomerType) {
